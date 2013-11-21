@@ -1,7 +1,4 @@
-/*source 'https://rubygems.org'
-=======
 source 'https://rubygems.org'
->>>>>>> 40fe5cffb6a1fc0b1cbe1aa505c23dfa73a5eedc
 
 gem 'rails', '3.2.14'
 
