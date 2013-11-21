@@ -1,0 +1,30 @@
+Models:
+
+  Profile:
+      f_name = string
+      l_namee = string
+      city = string
+      country = string
+      interests = array of strings
+      
+  User: 
+        id - number
+        has one Profile - type(Profile)
+        Friends: 
+             hash of UserId, enum{friend, enemy, pending]
+        has many posts  - type(Post)
+        post_count - int
+        friend_count - int
+        
+  Post: 
+       id - user_id + _number
+       belongs to user
+       content - string
+       timestamp - type(date+time)
+       has many likes/dislikes       
+
+ Comment:
+       belongs to posts
+       
+
+ Likes/Dislikes:
