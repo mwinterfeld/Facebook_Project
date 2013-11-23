@@ -1,15 +1,4 @@
-<<<<<<< HEAD
-# Added comment
 source 'https://rubygems.org'
-=======
-/*source 'https://rubygems.org'
-<<<<<<< HEAD
->>>>>>> c0278dbd1f422a6569717fc88a641b604126bb6e
-=======
-=======
-source 'https://rubygems.org'
->>>>>>> 40fe5cffb6a1fc0b1cbe1aa505c23dfa73a5eedc
->>>>>>> 6948783db1ed8f112e648310ec03ace53892958c
 
 gem 'rails', '3.2.14'
 
