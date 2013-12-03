@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  post_count: 1
+  friend_count: 1
+  friends: 
+
+two:
+  id: 1
+  post_count: 1
+  friend_count: 1
+  friends: 
