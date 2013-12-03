@@ -11,7 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131203003936) do
+ActiveRecord::Schema.define(:version => 20131203005714) do
+
+  create_table "posts", :force => true do |t|
+    t.string   "content"
+    t.string   "timestamp"
+    t.integer  "is_comment"
+    t.integer  "likes_count"
+    t.integer  "dislikes_count"
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+  end
 
   create_table "profiles", :force => true do |t|
     t.string   "first_name"
@@ -27,6 +37,8 @@ ActiveRecord::Schema.define(:version => 20131203003936) do
     t.integer  "post_count"
     t.integer  "friend_count"
     t.string   "friends"
+    t.string   "username"
+    t.string   "password"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
