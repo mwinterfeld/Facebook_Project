@@ -2,6 +2,14 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    @user = User.new(:username=>params[:signup_username], :password=> params[:signup_password])
+    @profile = Profile.new(:first_name=>params[:first_name], :last_name=>params[:last_name])
+    @user.profile = @profile
+    p @user.profile.first_name
+    @user.save!
+
+    temp = User.find_all_by_username(params[:signup_username]) 
+    print temp
     #@users = User.all
 
     #respond_to do |format|
