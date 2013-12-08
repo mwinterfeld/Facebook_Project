@@ -1,4 +1,7 @@
 Facebook::Application.routes.draw do
+  resources :logins
+
+
   resources :posts
 
 
@@ -7,7 +10,7 @@ Facebook::Application.routes.draw do
 
   resources :profiles
 
-  root :to => redirect("/users")
+  root :to => redirect("/logins")
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

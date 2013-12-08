@@ -2,14 +2,19 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    if(params[:signup_username] && params[:signup_password] && params[:first_name] && params[:last_name]) then
+    temp = User.find_all_by_username(params[:signup_username]) 
+    if(temp) then
+      flash[:notice] = "That username is already taken."
+      return redirect_to users_path
+    end
     @user = User.new(:username=>params[:signup_username], :password=> params[:signup_password])
     @profile = Profile.new(:first_name=>params[:first_name], :last_name=>params[:last_name])
     @user.profile = @profile
-    p @user.profile.first_name
     @user.save!
 
-    temp = User.find_all_by_username(params[:signup_username]) 
-    print temp
+    end
+
     #@users = User.all
 
     #respond_to do |format|

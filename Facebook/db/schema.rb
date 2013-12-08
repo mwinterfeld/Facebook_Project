@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131203005714) do
+ActiveRecord::Schema.define(:version => 20131208224532) do
 
   create_table "posts", :force => true do |t|
     t.string   "content"
@@ -37,10 +37,10 @@ ActiveRecord::Schema.define(:version => 20131203005714) do
     t.integer  "post_count"
     t.integer  "friend_count"
     t.string   "friends"
-    t.string   "username"
-    t.string   "password"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+    t.string   "username"
+    t.string   "password"
   end
 
 end
