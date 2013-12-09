@@ -2,25 +2,33 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    if(params[:signup_username] && params[:signup_password] && params[:first_name] && params[:last_name]) then
-    temp = User.find_all_by_username(params[:signup_username]) 
-    if(temp) then
-      flash[:notice] = "That username is already taken."
-      return redirect_to users_path
+    if(params[:signup_username] && params[:signup_password] && params[:first_name] && params[:last_name])
+      if(!params[:signup_username].empty? && !params[:signup_password].empty? && !params[:first_name].empty? && !params[:last_name].empty?) then
+        temp = User.find_all_by_username(params[:signup_username]) 
+        temp.each do |user|
+          if(user[:username] == params[:signup_username]) then
+            flash[:notice] = "That username is already taken."
+            return redirect_to users_path
+          end
+        end
+      @user = User.new(:username=>params[:signup_username], :password => params[:signup_password])
+      @profile = Profile.new(:first_name=>params[:first_name], :last_name=>params[:last_name])
+      @user.profile = @profile
+      @user.save!
+      end
     end
-    @user = User.new(:username=>params[:signup_username], :password=> params[:signup_password])
-    @profile = Profile.new(:first_name=>params[:first_name], :last_name=>params[:last_name])
-    @user.profile = @profile
-    @user.save!
-
+    if(params[:username])
+      p params
+      temp = User.find_by_username(params[:username])
+      if(temp) then
+      if(temp[:password] == params[:password]) then
+        redirect_to profiles_path
+      end
+    end
     end
 
-    #@users = User.all
-
-    #respond_to do |format|
-    #  format.html # index.html.erb
-    #  format.json { render json: @users }
   end
+
 
   # GET /users/1
   # GET /users/1.json
