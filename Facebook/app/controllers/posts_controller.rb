@@ -3,15 +3,15 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.all
+    @username = session[:user][:username]
 
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @posts }
+    if(session[:user][:friends]) then
+      session[:user][:friends].each do |friend|
+        frend = User.find_by_username("#{friend}")
+      end
     end
   end
 
-  # GET /posts/1
-  # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
 

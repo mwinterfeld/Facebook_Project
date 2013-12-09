@@ -2,6 +2,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+    if(session[:user]) then
+      return redirect_to posts_path
+    end
     if(params[:signup_username] && params[:signup_password] && params[:first_name] && params[:last_name])
       if(!params[:signup_username].empty? && !params[:signup_password].empty? && !params[:first_name].empty? && !params[:last_name].empty?) then
         temp = User.find_all_by_username(params[:signup_username]) 
@@ -11,19 +14,20 @@ class UsersController < ApplicationController
             return redirect_to users_path
           end
         end
-      @user = User.new(:username=>params[:signup_username], :password => params[:signup_password])
+      @user = User.new(:username=>params[:signup_username], :password => params[:signup_password], :friends => ["jim"])
       @profile = Profile.new(:first_name=>params[:first_name], :last_name=>params[:last_name])
       @user.profile = @profile
       @user.save!
       end
     end
     if(params[:username])
-      p params
       temp = User.find_by_username(params[:username])
       if(temp) then
-      if(temp[:password] == params[:password]) then
-        redirect_to profiles_path
-      end
+        if(temp[:password] == params[:password]) then
+          session[:user] = temp
+          p temp
+          return redirect_to posts_path
+        end
     end
     end
 

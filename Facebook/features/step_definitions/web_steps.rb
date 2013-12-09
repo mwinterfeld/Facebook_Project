@@ -45,7 +45,12 @@ Given /^(?:|I )am on (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
-When /^(?:|I )go to (.+)$/ do |page_name|
+Given /^(?:|I )am on (.+) with id ([0-9]+)$/ do |page_name, id|
+  visit path_to(page_name, id)
+end
+
+When /^(?:|I )g
+o to (.+)$/ do |page_name|
   visit path_to(page_name)
 end
 
