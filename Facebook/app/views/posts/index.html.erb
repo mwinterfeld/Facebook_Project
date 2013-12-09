@@ -24,7 +24,7 @@
 
       #page {
         background-color: #f0f0f0;
-        width: 1250px;
+        width: 800px;
         margin: 0;
         margin-left: auto;
         margin-right: auto;
@@ -170,11 +170,20 @@
       }
     </style>
 
+
+
 <div id="page">
-    <div id="header", style="float:left">
-        <div id="head_info">    
+    <div id="header1">
+        <div id="head_info", style="float:left">    
             <h1>Newsfeed</h1>
             <h2><%= "Hello there #{@username}" %></h2>
+        </div id="search", style="float:center">
+        <div><%= form_tag posts_path, :method => 'get' do %>
+          <p>
+            <%= text_field_tag :search, params[:search] %>
+            <%= submit_tag "Search", :name => nil %>
+          </p>
+        <% end %>
         </div>
         <div id="logout", style="float:right">
             <form action="">

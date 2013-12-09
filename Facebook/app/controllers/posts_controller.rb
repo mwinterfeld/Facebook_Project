@@ -2,6 +2,12 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    if(params[:search]) then
+      @matches = []
+      @matches << Profile.find_all_by_first_name(params[:search])
+      @matches << Profile.find_all_by_last_name(params[:search])
+      p @matches
+    end
     @posts = Post.all
     @username = session[:user][:username]
 
