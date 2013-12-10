@@ -15,6 +15,8 @@ module NavigationHelpers
     case page_name
 
     when /^the Facebook home page$/ then '/users'
+    when /^(.*)'s profile page$/ 
+      user_profile_path(User.find_by_username($1))
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

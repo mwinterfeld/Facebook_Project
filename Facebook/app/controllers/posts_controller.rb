@@ -2,18 +2,36 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    if(params[:commit]) then
+      session.clear
+      return redirect_to users_path
+    end
+
     if(params[:search]) then
+      @user_search = params[:search].split(' ')
       @matches = []
-      @matches << Profile.find_all_by_first_name(params[:search])
-      @matches << Profile.find_all_by_last_name(params[:search])
-      p @matches
+      @user_search.each do |x|
+        @matches << Profile.find_all_by_first_name("#{x}")
+        @matches << Profile.find_all_by_last_name("#{x}")
+
+        @matched_ids=[]
+        @matches.each do |x|
+            x.each do |y|
+              @matched_ids << y[:id]
+            end
+        end
+
+        # Store it in session and redirect to display them somewhere
+        session[:matches]= @matched_ids
+        return redirect_to new_post_path
+      end
     end
     @posts = Post.all
     @username = session[:user][:username]
 
     if(session[:user][:friends]) then
       session[:user][:friends].each do |friend|
-        frend = User.find_by_username("#{friend}")
+        friend = User.find_by_username("#{friend}")
       end
     end
   end
@@ -30,11 +48,10 @@ class PostsController < ApplicationController
   # GET /posts/new
   # GET /posts/new.json
   def new
-    @post = Post.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @post }
+    @profiles = []
+    
+    session[:matches].each do |id|
+      @profiles << Profile.find("#{id}")
     end
   end
 

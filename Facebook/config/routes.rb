@@ -1,16 +1,15 @@
 Facebook::Application.routes.draw do
   resources :logins
 
+  resources :posts, :path_names=> { new: 'search' }
 
-  resources :posts
 
-
-  resources :users
+  resources :users, path: "login"
 
 
   resources :profiles
 
-  root :to => redirect("/users")
+  root :to => redirect("/login")
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
@@ -36,8 +35,7 @@ Facebook::Application.routes.draw do
   #       get 'sold'
   #     end
   #   end
-
-  # Sample resource route with sub-resources:
+# Sample resource route with sub-resources:
   #   resources :products do
   #     resources :comments, :sales
   #     resource :seller

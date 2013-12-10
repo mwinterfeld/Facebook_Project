@@ -6,7 +6,8 @@ Feature:
 
 Scenario: change my user interests
 
-  Given I am on my profile page 
+  Given my username is 'jira' 
+  And I am on jira's profile page 
   When I press "Edit Profile"
   Then I should be on the edit profile page
   When I fill in "interests" with "dogs"

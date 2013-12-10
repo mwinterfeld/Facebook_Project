@@ -1,5 +1,19 @@
-<h1>New post</h1>
+<h1>Search Results</h1>
 
-<%= render 'form' %>
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Country</th>
+  </tr>
 
-<%= link_to 'Back', posts_path %>
+<% if (@profiles) then %>
+<% @profiles.each do |id| %>
+  <tr>
+    <td><%= id[:first_name]%></td>
+    <td><%= id[:last_name]%></td>
+    <td><%= id[:country]%></td>
+  </tr>
+<% end %>
+<% end %>
+</table>
