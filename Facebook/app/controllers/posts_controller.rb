@@ -12,6 +12,8 @@ class PostsController < ApplicationController
       @id = session[:user][:id]
       @user = User.find(@id)
       @posts = @user.posts
+      @profile = @user.profile
+      @profile_id = @profile[:user_id]
     end
 
     @username = session[:user][:username]
@@ -20,6 +22,7 @@ class PostsController < ApplicationController
         friend = User.find_by_username("#{friend}")
       end
     end
+
   end
 
   def show

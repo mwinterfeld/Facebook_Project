@@ -98,6 +98,7 @@
         <div id="head_info", style="float:left">    
             <h1>Newsfeed</h1>
             <h2><%= "Hello there #{@username}" %></h2>
+            <h3><%= link_to 'Profile', profile_path(@profile)%></h3>
         </div id="search", style="float:center">
         <div><%= form_tag 'posts/search_result', :method => 'post' do %>
           <p>
