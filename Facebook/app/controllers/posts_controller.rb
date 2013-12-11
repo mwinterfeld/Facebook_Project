@@ -2,14 +2,19 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    if(params[:commit]) then
+    if(params[:commit]== "Logout") then
       session.clear
       return redirect_to users_path
     end
 
-    @posts = Post.all
-    @username = session[:user][:username]
+    # Display your own posts
+    if(session[:user][:id])then
+      @id = session[:user][:id]
+      @user = User.find(@id)
+      @posts = @user.posts
+    end
 
+    @username = session[:user][:username]
     if(session[:user][:friends]) then
       session[:user][:friends].each do |friend|
         friend = User.find_by_username("#{friend}")
@@ -71,6 +76,8 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    # Force the post to have the user id associated
+    params[:post][:user_id] = session[:user][:id]
     @post = Post.new(params[:post])
 
     respond_to do |format|

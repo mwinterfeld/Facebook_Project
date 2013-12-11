@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131208232606) do
+ActiveRecord::Schema.define(:version => 20131211064311) do
 
   create_table "posts", :force => true do |t|
     t.string   "content"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(:version => 20131208232606) do
     t.integer  "dislikes_count"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
+    t.string   "user_id"
+    t.string   "integer"
   end
 
   create_table "profiles", :force => true do |t|
