@@ -7,25 +7,6 @@ class PostsController < ApplicationController
       return redirect_to users_path
     end
 
-    if(params[:search]) then
-      @user_search = params[:search].split(' ')
-      @matches = []
-      @user_search.each do |x|
-        @matches << Profile.find_all_by_first_name("#{x}")
-        @matches << Profile.find_all_by_last_name("#{x}")
-
-        @matched_ids=[]
-        @matches.each do |x|
-            x.each do |y|
-              @matched_ids << y[:id]
-            end
-        end
-
-        # Store it in session and redirect to display them somewhere
-        session[:matches]= @matched_ids
-        return redirect_to new_post_path
-      end
-    end
     @posts = Post.all
     @username = session[:user][:username]
 
@@ -45,13 +26,40 @@ class PostsController < ApplicationController
     end
   end
 
+  def search_result
+    @profiles = []
+    if(params[:search]) then
+      @user_search = params[:search].split(' ')
+      @matches = []
+      @user_search.each do |x|
+        @matches << Profile.find_all_by_first_name("#{x.downcase}")
+        @matches << Profile.find_all_by_last_name("#{x.downcase}")
+
+        @matched_ids=[]
+        @matches.each do |x|
+            x.each do |y|
+              @matched_ids << y[:id]
+            end
+        end
+        # Store it in session and redirect to display them somewhere
+        session[:matches]= @matched_ids
+        #return redirect_to '/posts/search_result' 
+      end
+    end
+    if session[:matches] then
+      session[:matches].each do |id|
+        @profiles << Profile.find("#{id}")
+      end
+    end
+  end
+
   # GET /posts/new
   # GET /posts/new.json
   def new
-    @profiles = []
-    
-    session[:matches].each do |id|
-      @profiles << Profile.find("#{id}")
+    @post = Post.new
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render json: @user }
     end
   end
 

@@ -1,13 +1,13 @@
 Facebook::Application.routes.draw do
   resources :logins
 
-  resources :posts, :path_names=> { new: 'search' }
-
+  resources :posts 
 
   resources :users, path: "login"
 
-
   resources :profiles
+
+  match '/posts/search_result'
 
   root :to => redirect("/login")
   # The priority is based upon order of creation:
