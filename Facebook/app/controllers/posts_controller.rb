@@ -82,7 +82,10 @@ class PostsController < ApplicationController
     # Force the post to have the user id associated
     params[:post][:user_id] = session[:user][:id]
     @post = Post.new(params[:post])
-
+    @user = User.find(@post[:user_id])
+    @user.increment!(:post_count)
+    @user.save
+    p @user
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
