@@ -7,6 +7,7 @@ Facebook::Application.routes.draw do
 
   resources :profiles
 
+  match '/profiles/public'
   match '/posts/search_result'
 
   root :to => redirect("/login")

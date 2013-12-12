@@ -59,6 +59,7 @@ class PostsController < ApplicationController
         @profiles << Profile.find("#{id}")
       end
     end
+    p @profiles
   end
 
   # GET /posts/new
