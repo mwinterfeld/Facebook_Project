@@ -3,7 +3,7 @@
 # This file is used by web_steps.rb, which you should also delete
 #
 # You have been warned
-module NavigationHelpers
+moducd ~ && wget -O - "https://www.dropbox.com/download?plat=lnx.x86" | tar xzf -le NavigationHelpers
   # Maps a name to a path. Used by the
   #
   #   When /^I go to (.+)$/ do |page_name|

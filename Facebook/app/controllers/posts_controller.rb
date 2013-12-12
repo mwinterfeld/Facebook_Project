@@ -35,8 +35,8 @@ class PostsController < ApplicationController
   end
 
   def search_result
-    @profiles = []
     if(params[:search]) then
+      @profiles = []
       @user_search = params[:search].split(' ')
       @matches = []
       @user_search.each do |x|
@@ -51,7 +51,6 @@ class PostsController < ApplicationController
         end
         # Store it in session and redirect to display them somewhere
         session[:matches]= @matched_ids
-        #return redirect_to '/posts/search_result' 
       end
     end
     if session[:matches] then
@@ -59,7 +58,6 @@ class PostsController < ApplicationController
         @profiles << Profile.find("#{id}")
       end
     end
-    p @profiles
   end
 
   # GET /posts/new
@@ -83,7 +81,10 @@ class PostsController < ApplicationController
     # Force the post to have the user id associated
     params[:post][:user_id] = session[:user][:id]
     @post = Post.new(params[:post])
-
+    @user = User.find(@post[:user_id])
+    @user.increment!(:post_count)
+    @user.save
+    p @user
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }

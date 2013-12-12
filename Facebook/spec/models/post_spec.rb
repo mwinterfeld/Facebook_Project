@@ -1,5 +1,13 @@
-require 'spec_helper'
+require "spec_helper"
+require "post"
+require "user"
 
 describe Post do
-  pending "add some examples to (or delete) #{__FILE__}"
+	let(:post){Post.new}
+	let(:user){User.new}
+	before {post.content = "Hello World"}
+
+	it "has a content that matches the content" do
+  		post.content.should == "Hello World"
+  	end
 end
