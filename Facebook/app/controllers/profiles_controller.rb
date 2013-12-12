@@ -32,6 +32,9 @@ class ProfilesController < ApplicationController
     @current_user = []
   end
 
+  def friends
+    @profile = session[:user][:friends]
+  end
   # GET /profiles/new
   # GET /profiles/new.json
   def new

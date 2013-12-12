@@ -12,6 +12,8 @@ def index
     if(session[:user][:id])then
       @id = session[:user][:id]
       @user = User.find(@id)
+      @friends = @user.friends
+      @friends = @friends[1..4]
       @posts = @user.posts
       @profile = @user.profile
       @profile_id = @profile[:user_id]

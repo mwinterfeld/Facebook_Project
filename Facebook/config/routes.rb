@@ -15,11 +15,13 @@ Facebook::Application.routes.draw do
     collection do
       get :public
       get :private
+      get :friends
     end
   end
 
   match "/profiles/public" => "profiles#public"
   match "/profiles/private" => "profiles#private"
+  match "/profiles/friends" => "profiles#friends"
 
   root :to => redirect("/login")
   # The priority is based upon order of creation:
