@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile</title>
+    <style type="text/css" media="screen">
+      body {
+        margin: 0;
+        margin-bottom: 25px;
+        padding: 0;
+        background-color: #f0f0f0;
+        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+        font-size: 13px;
+        color: #333;
+      }
+
+      h1 {
+        font-size: 28px;
+        color: #000;
+      }
+
+      a  {color: #03c}
+      a:hover {
+        background-color: #03c;
+        color: white;
+        text-decoration: none;
+      }
+
+
+      #page {
+        background-color: #f0f0f0;
+        width: 1250px;
+        margin: 0;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #content {
+        float: left;
+        background-color: white;
+        border: 3px solid #aaa;
+        border-top: none;
+        padding: 25px;
+        width: 1000px;
+        height: 500px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      #sidebar {
+        float: right;
+        width: 175px;
+      }
+
+      #footer {
+        clear: both;
+      }
+
+      #header, #about, #getting-started {
+        padding-left: 75px;
+        padding-right: 30px;
+      }
+
+
+      #header {
+        background-repeat: no-repeat;
+        background-position: top left;
+        height: 64px;
+      }
+      #header h1, #header h2 {margin: 0}
+      #header h2 {
+        color: #888;
+        font-weight: normal;
+        font-size: 16px;
+      }
+
+      #sidebar ul {
+        margin-left: 0;
+        padding-left: 0;
+      }
+      #sidebar ul h3 {
+        margin-top: 25px;
+        font-size: 16px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ccc;
+      }
+      #sidebar li {
+        list-style-type: none;
+      }
+      #sidebar ul.links li {
+        margin-bottom: 5px;
+      }
+
+      .filename {
+        font-style: italic;
+      }
+    </style>
+    
+  </head>
+  <body>
+    <div id="page">
+      <div id="content">
+        <div id="header"> 
+          <div id = "title" style="float:left">
+            <h1>Profile</h1>
+            <h2>Welcome to your Profile!</h2>
+          </div>
+          <div style="float;right">
+          </div>
+          <div style="clear:both">
+          </div>
+                <p id="notice"><%= notice %></p>
+                <p>
+                  <b>First name:</b>
+                  <%= @profile.first_name %>
+                </p>
+
+                <p>
+                  <b>Last name:</b>
+                  <%= @profile.last_name %>
+                </p>
+
+                <p>
+                  <b>City:</b>
+                  <%= @profile.city %>
+                </p>
+
+                <p>
+                  <b>Country:</b>
+                  <%= @profile.country %>
+                </p>
+
+                <p>
+                  <b>Interests:</b>
+                  <%= @profile.interests %>
+                </p>
+
+                <%= link_to 'NewsFeed', posts_path %> |
+                <%= link_to 'Edit', edit_profile_path(@profile) %> |
+        </div>
+
+      <div id="footer">&nbsp;</div>
+    </div>
+  </body>
+</html>
+
