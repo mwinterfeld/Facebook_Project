@@ -20,7 +20,12 @@
         text-decoration: none;
       }
 
-
+      #friends {
+        width: 200px;
+      }
+      #posts {
+        width: 600px;
+      }
       #page {
         width: 800px;
         margin: 0;
@@ -60,7 +65,7 @@
         background-position: top left;
         height: 64px;
       }
-      #header h1, #header h2 {margin: 0}
+      #header h1, #header h2 {margin: 0; width: 200px;}
       #header h2 {
         color: #888;
         font-weight: normal;
@@ -92,12 +97,16 @@
 
 
 <div id="page">
-    <div id="header1">
-        <div id="head_info", style="float:left">    
+    <div id="header1" style="float:left">
+        <div id="head_info">    
             <h1>Newsfeed</h1>
             <h2><%= "Hello there #{@username}" %></h2>
-            <h3><%= link_to 'Profile', public_profiles_path(@id) %></h3>
+            <h3><%= link_to 'Profile', private_profiles_path(@id) %></h3>
         </div id="search", style="float:center">
+         <div style="clear:both"></div>
+    </div>
+<div id="posts" style="float:center">
+</div id="search">
         <div><%= form_tag search_result_posts_path do %>
           <p>
             <%= text_field_tag :search, params[:search] %>
@@ -105,16 +114,14 @@
           </p>
         <% end %>
         </div>
-        <div id="logout", style="float:right">
-          <%= form_tag posts_path , :method=> 'get' do%>
+
+        <div><%= form_tag posts_path do %>
           <p>
-            <%= submit_tag "Logout"%>
+            <%= text_area_tag :message, params[:message], size: "31x8" %>
+            <%= submit_tag "Post", :name => nil %>
           </p>
-        <% end%>
+        <% end %>
         </div>
-         <div style="clear:both"></div>
-    </div>
-<div id="posts" style=float:center>
 <table>
   <tr>
     <th>All recent Posts</th>
@@ -136,6 +143,13 @@
 </table>
 
 <div id="friends" style=float:right >
+<div id="logout", style="float:right">
+          <%= form_tag posts_path , :method=> 'get' do%>
+          <p>
+            <%= submit_tag "Logout"%>
+          </p>
+        <% end%>
+        </div>
 <table>
   <tr>
     <th><%= link_to 'Friends', friends_profiles_path %></th>

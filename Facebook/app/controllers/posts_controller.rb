@@ -81,24 +81,10 @@ def index
   # POST /posts
   # POST /posts.json
   def create
-    if(!params[:post]) then
-      redirect_to posts_path
-    end
-    # Force the post to have the user id associated
-    params[:post][:user_id] = session[:user][:id]
-    @post = Post.new(params[:post])
-    @user = User.find(@post[:user_id])
-    @user.increment!(:post_count)
-    @user.save
-    p @user
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to @post, notice: 'Post was successfully created.' }
-        format.json { render json: @post, status: :created, location: @post }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
+    if(params[:message]) then
+      @user = User.find(session[:user][:id])
+      @user.add_post(params[:message])
+      redirect_to posts_path, :method => :get
     end
   end
 

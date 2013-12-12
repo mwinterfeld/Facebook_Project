@@ -111,7 +111,6 @@
           </div>
           <div style="clear:both">
           </div>
-          <div>
                 <p id="notice"><%= notice %></p>
                 <p>
                   <b>First name:</b>
@@ -127,16 +126,28 @@
                   <b>City:</b>
                   <%= @profile.city %>
                 </p>
-                </div>
+
+                <p>
+                  <b>Country:</b>
+                  <%= @profile.country %>
+                </p>
+
+                <p>
+                  <b>Interests:</b>
+                  <%= @profile.interests %>
+                </p>
 
                 <div>
-                <form>
-                <input type="submit" value="Add Friend" name="add">
-                </form>
+                <% if(session[:user][:id] == @id) then %>
+               <p><%= link_to 'Edit', edit_profile_path(@profile) %> </p>
+                <% end %>
                 </div>
-                </div>
+        </div>
+
       <div id="footer">&nbsp;</div>
     </div>
   </body>
 </html>
+
+
 

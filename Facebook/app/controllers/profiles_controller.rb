@@ -12,24 +12,24 @@ class ProfilesController < ApplicationController
 
   # GET /profiles/1.json
   def public
-    @current_user = User.find(params[:format])
-    @id = @current_user.id
-    @profile = @current_user.profile    
-  end
-
-  def private
-    if(params[:add]) then
+   if(params[:add]) then
       current_user = User.find(session[:user][:id])
       new_friend = User.find(params[:format])
 
-      current_user[:friends] << new_friend.username
-      current_user.save
+      new_friend.requesting(current_user.username)
+      current_user.pending(new_friend.username)
       session[:user] = current_user
       return redirect_to posts_path
     end
     @current_user = User.find(params[:format])
     @profile = @current_user.profile
-    @current_user = []
+    @current_user = []  
+  end
+
+  def private
+    @current_user = User.find(params[:format])
+    @id = @current_user.id
+    @profile = @current_user.profile 
   end
 
   def friends
