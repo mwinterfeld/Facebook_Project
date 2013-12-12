@@ -19,6 +19,7 @@ Facebook::Application.routes.draw do
   end
 
   match "/profiles/public" => "profiles#public"
+  match "/profiles/private" => "profiles#private"
 
   root :to => redirect("/login")
   # The priority is based upon order of creation:

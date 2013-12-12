@@ -1,7 +1,8 @@
 class PostsController < ApplicationController
+
+def index
   # GET /posts
   # GET /posts.json
-  def index
     if(params[:commit]== "Logout") then
       session.clear
       return redirect_to users_path
@@ -78,6 +79,9 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
+    if(!params[:post]) then
+      redirect_to posts_path
+    end
     # Force the post to have the user id associated
     params[:post][:user_id] = session[:user][:id]
     @post = Post.new(params[:post])
