@@ -35,8 +35,8 @@ class PostsController < ApplicationController
   end
 
   def search_result
-    @profiles = []
     if(params[:search]) then
+      @profiles = []
       @user_search = params[:search].split(' ')
       @matches = []
       @user_search.each do |x|
@@ -51,7 +51,6 @@ class PostsController < ApplicationController
         end
         # Store it in session and redirect to display them somewhere
         session[:matches]= @matched_ids
-        #return redirect_to '/posts/search_result' 
       end
     end
     if session[:matches] then

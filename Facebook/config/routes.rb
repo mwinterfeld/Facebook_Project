@@ -1,13 +1,24 @@
 Facebook::Application.routes.draw do
   resources :logins
 
-  resources :posts 
+  resources :posts do
+    collection do
+      get :search_result
+    end
+  end
+
+  match "/posts/search_result" => "posts#search_result"
 
   resources :users, path: "login"
 
-  resources :profiles
+  resources :profiles do
+    collection do
+      get :public
+      get :private
+    end
+  end
 
-  match '/posts/search_result'
+  match "/profiles/public" => "profiles#public"
 
   root :to => redirect("/login")
   # The priority is based upon order of creation:

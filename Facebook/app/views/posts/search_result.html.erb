@@ -5,6 +5,7 @@
     <th>First Name</th>
     <th>Last Name</th>
     <th>Country</th>
+    <th>Link to Profile</th>
   </tr>
 
 <% if (@profiles) then %>
@@ -13,6 +14,7 @@
     <td><%= id[:first_name]%></td>
     <td><%= id[:last_name]%></td>
     <td><%= id[:country]%></td>
+    <td><%= link_to 'Link to Profile', public_profiles_path(id[:user_id]) %></td>
   </tr>
 <% end %>
 <% end %>
