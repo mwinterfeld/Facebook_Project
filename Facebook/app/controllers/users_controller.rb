@@ -24,16 +24,13 @@ class UsersController < ApplicationController
     end
     if(params[:username])
       temp = User.find_by_username(params[:username])
-      p temp
       if(temp) then
         if(temp[:password] == params[:password]) then
           session[:user] = temp
           return redirect_to posts_path
-        else 
-          return redirect_to users_path
+        end
       end
           return redirect_to users_path
-    end
     end
 
   end

@@ -96,9 +96,9 @@
         <div id="head_info", style="float:left">    
             <h1>Newsfeed</h1>
             <h2><%= "Hello there #{@username}" %></h2>
-            <h3><%= link_to 'Profile', profile_path(@profile)%></h3>
+            <h3><%= link_to 'Profile', public_profiles_path(@id) %></h3>
         </div id="search", style="float:center">
-        <div><%= form_tag 'posts/search_result', :method => 'post' do %>
+        <div><%= form_tag search_result_posts_path do %>
           <p>
             <%= text_field_tag :search, params[:search] %>
             <%= submit_tag "Search", :name => nil %>

@@ -10,24 +10,10 @@ class ProfilesController < ApplicationController
     end
   end
 
-  def public
-    if params[:id] then
-        @profile = Profile.find(params[:id])
-    end
-  end
-
   # GET /profiles/1.json
-  def show
-        if session[:user][:id] then
-          @current_user = User.find(session[:user][:id])
-          @profile = @current_user.profile
-        else
-            redirect_to @profile 
-        end
-        respond_to do |format|
-          format.html # show.html.erb
-          format.json { render json: @profile }
-        end
+  def public
+    @current_user = User.find(params[:format])
+    @profile = @current_user.profile    
   end
 
   # GET /profiles/new
