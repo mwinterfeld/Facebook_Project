@@ -3,17 +3,15 @@ require 'user'
 require 'post'
 
 describe User do
-	let(:user1){User.new(:friends => {})}
+	let(:user1){User.new(:friends => {},:posts=> [])}
 	let(:user2){User.new(:friends => {})}
-	let(:post){Post.new}
-	before {
-		post.content = "Hello World"
-		if post.content != nil
-			user1.post_count = 1
-		end
-	}
+	let(:post1){Post.new(:content => "Hello world!")}
+	let(:post2){Post.new(:content => "Welocome to Planet earth!")}
+
 	it "has the correct count of post" do
-		user1.post_count.should == 1
+                user1.add_post(post1.content)
+                user1.add_post(post2.content)
+		user1.post_count.should == 2
   	end
 
   	before {

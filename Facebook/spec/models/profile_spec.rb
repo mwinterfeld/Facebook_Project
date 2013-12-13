@@ -23,4 +23,12 @@ describe Profile do
     user.profile = profile2
     user.profile.first_name.should match(/^john$/)
   end
+
+  it "should have ability to edit a profile"do
+    user.profile = profile1
+    user.profile.first_name = "something else"
+    user.profile.last_name = "last name"
+    user.profile.first_name.should match(/^something else$/)
+    user.profile.last_name.should match(/^last name$/)
+  end
 end
