@@ -3,6 +3,20 @@ class PostsController < ApplicationController
 def index
   # GET /posts
   # GET /posts.json
+    params.keys.each do |key|
+      session[:user][:friends].each do |friend|
+        if key == friend[0] then
+          @new_friend = key
+        end
+      end
+      if(@new_friend) then
+        @tmp = User.find_by_username(@new_friend)
+        session[:user].add_friend(@tmp[:username])
+        @tmp.add_friend(session[:user][:username])
+        return redirect_to posts_path
+      end
+    end
+    
     if(params[:commit]== "Logout") then
       session.clear
       return redirect_to users_path
@@ -12,17 +26,22 @@ def index
     if(session[:user][:id])then
       @id = session[:user][:id]
       @user = User.find(@id)
-      @friends = @user.friends
-      @friends = @friends[1..4]
       @posts = @user.posts
       @profile = @user.profile
+      @first_name = @profile[:first_name]
       @profile_id = @profile[:user_id]
     end
 
+    @friends = []
+    @requests = []
     @username = session[:user][:username]
     if(session[:user][:friends]) then
       session[:user][:friends].each do |friend|
-        friend = User.find_by_username("#{friend}")
+        if friend[1] == "friend" and friend[0] != session[:user][:username] then
+          @friends << friend[0]
+        elsif friend[1] == "requesting" then
+          @requests << friend[0]
+        end
       end
     end
 
@@ -41,25 +60,33 @@ def index
     if(params[:search]) then
       @profiles = []
       @user_search = params[:search].split(' ')
-      @matches = []
       @user_search.each do |x|
-        @matches << Profile.find_all_by_first_name("#{x.downcase}")
-        @matches << Profile.find_all_by_last_name("#{x.downcase}")
+        @profiles += Profile.find_all_by_first_name("#{x.downcase}")
+        @profiles += Profile.find_all_by_last_name("#{x.downcase}")
+      end
+      @friends = []
+      @enemies = []
 
-        @matched_ids=[]
-        @matches.each do |x|
-            x.each do |y|
-              @matched_ids << y[:id]
-            end
+      if(session[:user].friend_count > 1) then
+        tmp = []
+        session[:user][:friends].each do |f|
+          tmp << f.key(1)
         end
-        # Store it in session and redirect to display them somewhere
-        session[:matches]= @matched_ids
+
+        @profiles.each do |b|
+          if tmp.includes?(b.username) then
+            @friends << b
+          else
+            @enemies << b
+          end
+        end
+    
+      else
+        @profiles.each do |b|
+          @enemies << b
+        end
       end
-    end
-    if session[:matches] then
-      session[:matches].each do |id|
-        @profiles << Profile.find("#{id}")
-      end
+
     end
   end
 

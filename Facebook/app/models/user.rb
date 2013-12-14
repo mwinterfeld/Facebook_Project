@@ -7,17 +7,21 @@ class User < ActiveRecord::Base
   attr_accessible :posts
 
   def requesting(username)
-  	self.friends[username.to_sym] = "requesting"
+  	self.friends << [username, "requesting"]
   	self.save
   end
 
   def pending(username)
-  	self.friends[username.to_sym] = "pending"
+  	self.friends << [username, "pending"]
   	self.save
   end
 
   def add_friend(username)
-  	self.friends[username.to_sym] = "friend"
+  	self.friends.each do |array|
+      if(array[0] == username)
+        array[1] = "friend"
+      end
+    end
   	self.increment!(:friend_count)
   	self.save
   end

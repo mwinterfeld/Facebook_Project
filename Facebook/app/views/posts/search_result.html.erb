@@ -9,16 +9,21 @@
   </tr>
 
 <% if (@profiles) then %>
-<% @profiles.each do |id| %>
+<% @friends.each do |id| %>
   <tr>
     <td><%= id[:first_name]%></td>
     <td><%= id[:last_name]%></td>
     <td><%= id[:country]%></td>
-    <% if(session[:user][:friends].find_index(id[:username])) then %>
     <td><%= link_to 'Link to Profile', private_profiles_path(id[:user_id]) %>
-    <% else %>
+    </td>
+  </tr>
+<% end %>
+<% @enemies.each do |id| %>
+  <tr>
+    <td><%= id[:first_name]%></td>
+    <td><%= id[:last_name]%></td>
+    <td><%= id[:country]%></td>
     <td><%= link_to 'Link to Profile', public_profiles_path(id[:user_id]) %>
-    <% end %>
     </td>
   </tr>
 <% end %>

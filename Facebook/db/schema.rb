@@ -41,7 +41,7 @@ ActiveRecord::Schema.define(:version => 20131212050251) do
   create_table "users", :force => true do |t|
     t.integer  "post_count"
     t.integer  "friend_count"
-    t.string   "friends"
+    t.text     "friends"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "username"

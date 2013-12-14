@@ -21,13 +21,13 @@
       }
 
       #friends {
-        width: 200px;
+        width: 300px;
       }
       #posts {
-        width: 600px;
+        width: 600px; padding-top: 30px; padding-left: 100px;
       }
       #page {
-        width: 800px;
+        width: 1000px;
         margin: 0;
         margin-left: auto;
         margin-right: auto;
@@ -65,7 +65,8 @@
         background-position: top left;
         height: 64px;
       }
-      #header h1, #header h2 {margin: 0; width: 200px;}
+      #header h1, #newsfeed h2 {margin: 0; width: 150px; padding-right: 40px; padding-left: 10px;
+}
       #header h2 {
         color: #888;
         font-weight: normal;
@@ -88,41 +89,58 @@
       #sidebar ul.links li {
         margin-bottom: 5px;
       }
+      #table {
+        border-collapse:collapse;
+        border:1px solid blue;
+      }
 
       .filename {
         font-style: italic;
       }
     </style>
 
+<div id="newsfeed" style="float:left">   
+  <h1>Newsfeed</h1>
+  <h2><%= "Hello there #{@first_name}" %></h2>
+  <h3><%= link_to 'Profile', private_profiles_path(@id) %></h3>
+  <br>
+  <h3>Friend Requests</h3>
+  <table>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% if(@requests) then %>
+      <% @requests.each do |request| %>
+        <tr>
+        <td>User: <%= "#{request}" %> <%= form_tag posts_path , :method=> 'get' do%>
 
+        <%= button_tag "Add Friend", :name => "#{request}" %>
+    
+        <% end%></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </table>
+</div>
 
-<div id="page">
-    <div id="header1" style="float:left">
-        <div id="head_info">    
-            <h1>Newsfeed</h1>
-            <h2><%= "Hello there #{@username}" %></h2>
-            <h3><%= link_to 'Profile', private_profiles_path(@id) %></h3>
-        </div id="search", style="float:center">
-         <div style="clear:both"></div>
-    </div>
 <div id="posts" style="float:center">
-</div id="search">
-        <div><%= form_tag search_result_posts_path do %>
-          <p>
-            <%= text_field_tag :search, params[:search] %>
-            <%= submit_tag "Search", :name => nil %>
-          </p>
-        <% end %>
-        </div>
-
-        <div><%= form_tag posts_path do %>
-          <p>
-            <%= text_area_tag :message, params[:message], size: "31x8" %>
-            <%= submit_tag "Post", :name => nil %>
-          </p>
-        <% end %>
-        </div>
-<table>
+  <%= form_tag search_result_posts_path do %>
+    <p>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+    </p>
+  <% end %>
+  <%= form_tag posts_path do %>
+    <p>
+    <%= text_area_tag :message, params[:message], size: "31x4" %>
+    <%= submit_tag "Post", :name => nil %>
+    </p>
+  <% end %>
+  
+  <table id="table">
   <tr>
     <th>All recent Posts</th>
     <th></th>
@@ -132,7 +150,7 @@
 
 <% if(@posts) then %>
 <% @posts.each do |post| %>
-  <tr>
+  <tr >
     <td><%= post.content %></td>
     <td><%= link_to 'Show', post %></td>
     <td><%= link_to 'Edit', edit_post_path(post) %></td>
@@ -141,16 +159,14 @@
 <% end %>
 <% end %>
 </table>
-
-<div id="friends" style=float:right >
-<div id="logout", style="float:right">
-          <%= form_tag posts_path , :method=> 'get' do%>
-          <p>
-            <%= submit_tag "Logout"%>
-          </p>
-        <% end%>
-        </div>
-<table>
+</div>  
+<div id="friends" style="float:right" >
+  <%= form_tag posts_path , :method=> 'get' do%>
+  <p>
+    <%= submit_tag "Logout"%>
+  </p>
+  <% end%>
+  <table>
   <tr>
     <th><%= link_to 'Friends', friends_profiles_path %></th>
     <th></th>
@@ -167,9 +183,3 @@
 <% end %>
 </table>
 </div>  
-
-<br />
-
-<%= link_to 'New Post', new_post_path %>
-</div>
-</div>

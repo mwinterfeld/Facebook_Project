@@ -15,7 +15,7 @@ class UsersController < ApplicationController
             return redirect_to users_path
           end
         end
-      @user = User.new(:username=>params[:signup_username], :password => params[:signup_password], :friends =>[ params[:signup_username]])
+      @user = User.new(:username=>params[:signup_username], :password => params[:signup_password], :friends => [[params[:signup_username], "friend"]], :friend_count => 1 )
       @profile = Profile.new(:first_name=>params[:first_name].downcase, :last_name=>params[:last_name].downcase, :username => params[:signup_username])
       @user.profile = @profile
       @user.save!
