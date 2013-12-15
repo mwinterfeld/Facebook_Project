@@ -13,19 +13,13 @@
         color: #000;
       }
 
-      a  {color: #03c}
+      a  {color: blue}
       a:hover {
         background-color: #03c;
         color: white;
         text-decoration: none;
       }
 
-      #friends {
-        width: 300px;
-      }
-      #posts {
-        width: 600px; padding-top: 30px; padding-left: 100px;
-      }
       #page {
         width: 1000px;
         margin: 0;
@@ -35,12 +29,9 @@
 
       #content {
         float: left;
-        background-color: white;
-        border: 3px solid #aaa;
-        border-top: none;
+        background-color: lightgrey;
         padding: 25px;
         width: 1000px;
-        height: 500px;
         margin-left: auto;
         margin-right: auto;
       }
@@ -93,13 +84,53 @@
         border-collapse:collapse;
         border:1px solid blue;
       }
+      #posts {
+        float: left;
+
+        width: 400px;
+      }
+      #newsfeed {
+        float: left;
+
+      }
+      #friends {
+        float: left;
+        float: top;
+        margin-left: 30px;
+      }
+
+      #post_left {
+        width: 70px;
+        height: 35px;
+        float: left;
+        border-style:solid;
+        border-width:2px;
+        border-right: none;
+      }
+
+      #posts_header {
+        width: 300px;
+        font-size: 20px;
+        float: left;
+      }
+
+      #post_right {
+        width: 305px;
+        height: 35px;
+        float: left;
+        border-style:solid;
+        border-width:2px;
+        border-left: none;
+      }
 
       .filename {
         font-style: italic;
       }
     </style>
 
-<div id="newsfeed" style="float:left">   
+<body>
+<div id="content">
+<div id="newsfeed">   
   <h1>Newsfeed</h1>
   <h2><%= "Hello there #{@first_name}" %></h2>
   <h3><%= link_to 'Profile', private_profiles_path(@id) %></h3>
@@ -126,7 +157,7 @@
   </table>
 </div>
 
-<div id="posts" style="float:center">
+<div id="posts">
   <%= form_tag search_result_posts_path do %>
     <p>
     <%= text_field_tag :search, params[:search] %>
@@ -140,9 +171,9 @@
     </p>
   <% end %>
   
-  <table id="table">
+  <table>
   <tr>
-    <th>All recent Posts</th>
+    <th id="posts_header">All recent Posts</th>
     <th></th>
     <th></th>
     <th></th>
@@ -151,22 +182,23 @@
 <% if(@posts) then %>
 <% @posts.each do |post| %>
   <tr >
-    <td><%= link_to "#{post[:username]}", private_profiles_path(post[:user_id]) %></td>
-    <td><%= post.content %></td>
+    <td id="post_left"><%= link_to "#{post[:username]}", private_profiles_path(post[:user_id]) %></td>
+    <td id="post_right"><%= post.content %></td>
   </tr>
 <% end %>
 <% end %>
 </table>
 </div>  
-<div id="friends" style="float:right" >
+
+<div id="friends">
   <%= form_tag posts_path , :method=> 'get' do%>
   <p>
     <%= submit_tag "Logout"%>
   </p>
   <% end%>
+  <h1>Friends</h1>
   <table>
   <tr>
-    <th><%= link_to 'Friends', friends_profiles_path %></th>
     <th></th>
     <th></th>
     <th></th>
@@ -181,3 +213,5 @@
 <% end %>
 </table>
 </div>  
+</div>  
+</body>

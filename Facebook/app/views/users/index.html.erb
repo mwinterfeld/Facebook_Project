@@ -7,8 +7,8 @@
         margin: 0;
         margin-bottom: 25px;
         padding: 0;
-        background-color: #f0f0f0;
-        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
+        background-color: lightblue;
+        font-family: "Comic Sans MS", "Lucida Grande", "Bitstream Vera Sans", "Verdana";
         font-size: 13px;
         color: #333;
       }
@@ -35,8 +35,7 @@
       }
 
       #content {
-        float: left;
-        background-color: white;
+        background-color: lightblue;
         border: 3px solid #aaa;
         border-top: none;
         padding: 35px;
@@ -62,8 +61,10 @@
 
 
       #header {
+        margin-top: 20px;
         background-repeat: no-repeat;
         background-position: top left;
+        background-color: lightblue;
         height: 64px;
       }
       #header h1, #header h2 {margin: 0}
@@ -95,6 +96,9 @@
       }
 
       #SignUp{
+        background-color: lightblue;
+        float: left;
+        margin-left: 50px;
         width: 250px;  
       }
     </style>
@@ -113,8 +117,6 @@
     </script>
   </head>
   <body>
-    <div id="page">
-      <div id="content">
         <div id="header"> 
           <div id = "title" style="float:left">
             <h1>Facebook</h1>
@@ -126,11 +128,11 @@
             Password: <input type="password" name="password" style="width:150px">
           <input type="submit" value="Login">     
           </div>
-          <div style="clear:both"></div>
         </div>
 
         <div id="SignUp">
           <h1>Sign Up</h1>
+          <br>
           <form>
           First name: <input type="text" name="first_name"><br>
           Last name: <input type="text" name="last_name"><br>
@@ -139,8 +141,5 @@
           <input type="submit" value="Sign Up" name="SignUp">
           </form> 
         </div>
-
-      <div id="footer"></div>
-    </div>
   </body>
 </html>

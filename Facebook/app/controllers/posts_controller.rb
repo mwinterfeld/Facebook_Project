@@ -51,7 +51,7 @@ def index
       @tmp = User.find_by_username("#{friend}")
       @tmp_profile = Profile.find(@tmp.id)
       if(@tmp.post_count) then
-        ((@tmp.post_count - 2)..(@tmp.post_count - 1)).each do |item|
+        ((@tmp.post_count - 5)..(@tmp.post_count - 1)).each do |item|
           @posts << @tmp.posts[item]
         end
       end
@@ -64,6 +64,9 @@ def index
     if(session[:user].post_count) then
       @posts << session[:user].posts[session[:user].post_count - 1]
       @posts << session[:user].posts[session[:user].post_count - 2]
+      @posts << session[:user].posts[session[:user].post_count - 3]
+      @posts << session[:user].posts[session[:user].post_count - 4]
+      @posts << session[:user].posts[session[:user].post_count - 5]
     end
 
     @posts = @posts.sort_by {|post| post.created_at}
