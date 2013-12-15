@@ -26,9 +26,8 @@ def index
     if(session[:user][:id])then
       @id = session[:user][:id]
       @user = User.find(@id)
-      @posts = @user.posts
       @profile = @user.profile
-      @first_name = @profile[:first_name]
+      @first_name = @profile[:first_name].capitalize
       @profile_id = @profile[:user_id]
     end
 
@@ -45,6 +44,30 @@ def index
       end
     end
 
+    # Display most recent posts
+    @posts = []
+    i = 0
+    @friends.each do |friend|
+      @tmp = User.find_by_username("#{friend}")
+      @tmp_profile = Profile.find(@tmp.id)
+      if(@tmp.post_count) then
+        ((@tmp.post_count - 2)..(@tmp.post_count - 1)).each do |item|
+          @posts << @tmp.posts[item]
+        end
+      end
+      @friends[i] = @tmp_profile.first_name.capitalize + " " + @tmp_profile.last_name.capitalize
+      i = i+1
+    end
+
+    session[:user] = User.find_by_username(session[:user][:username])
+
+    if(session[:user].post_count) then
+      @posts << session[:user].posts[session[:user].post_count - 1]
+      @posts << session[:user].posts[session[:user].post_count - 2]
+    end
+
+    @posts = @posts.sort_by {|post| post.created_at}
+    @posts = @posts.reverse
   end
 
   def show

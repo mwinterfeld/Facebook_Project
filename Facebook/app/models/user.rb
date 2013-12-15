@@ -27,7 +27,8 @@ class User < ActiveRecord::Base
   end
 
   def add_post(post_content)
-    post = Post.new(:content => "#{post_content}", :likes_count => 0, :dislikes_count => 0, :is_comment => 0)
+    profile = Profile.find(self.id)
+    post = Post.new(:content => "#{post_content}", :likes_count => 0, :dislikes_count => 0, :is_comment => 0, :username => profile.first_name.capitalize + " " + profile.last_name.capitalize)
     self.posts << post
     self.increment!(:post_count)
     self.save
