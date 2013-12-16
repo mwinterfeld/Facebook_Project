@@ -63,14 +63,13 @@ def index
 
     if(session[:user].post_count) then
       @posts << session[:user].posts[session[:user].post_count - 1]
-      @posts << session[:user].posts[session[:user].post_count - 2]
-      @posts << session[:user].posts[session[:user].post_count - 3]
-      @posts << session[:user].posts[session[:user].post_count - 4]
-      @posts << session[:user].posts[session[:user].post_count - 5]
     end
 
+
+    if(@posts.size > 1) 
     @posts = @posts.sort_by {|post| post.created_at}
     @posts = @posts.reverse
+    end
   end
 
   def show
