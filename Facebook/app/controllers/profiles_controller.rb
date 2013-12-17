@@ -45,9 +45,10 @@ class ProfilesController < ApplicationController
   def edit
     if session[:user][:id] then
       @current_user = User.find(session[:user][:id])
+      @id = @current_user.id
       @profile = @current_user.profile
     else
-        redirect_to @profile 
+        redirect_to posts_path 
     end
   end
 
@@ -74,7 +75,7 @@ class ProfilesController < ApplicationController
 
     respond_to do |format|
       if @profile.update_attributes(params[:profile])
-        format.html { redirect_to @profile, notice: 'Profile was successfully updated.' }
+        format.html { redirect_to private_profiles_path(session[:user].id), notice: 'Profile was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
