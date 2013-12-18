@@ -26,7 +26,7 @@ def index
     if(session[:user][:id])then
       @id = session[:user][:id]
       @user = User.find(@id)
-      @profile = @user.profile
+      @profile = Profile.find_by_username(@user.username)
       @first_name = @profile[:first_name].capitalize
       @profile_id = @profile[:user_id]
     end
