@@ -11,7 +11,7 @@ Facebook::Application.routes.draw do
 
   resources :users, path: "login"
 
-  resources :profiles do
+  resources :profiles, path: "people" do
     collection do
       get :public
       get :private

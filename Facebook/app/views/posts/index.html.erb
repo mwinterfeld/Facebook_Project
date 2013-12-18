@@ -196,7 +196,7 @@
     <%= submit_tag "Logout"%>
   </p>
   <% end%>
-  <h1>Friends</h1>
+  <h1><%= link_to "Friends", profiles_path %></h1>
   <table>
   <tr>
     <th></th>
@@ -207,7 +207,7 @@
 <% if(@friends) then %>
 <% @friends.each do |friend| %>
   <tr>
-    <td><%= "#{friend}" %></td>
+    <td><%= link_to "#{friend[0]}", private_profiles_path(friend[1]) %></td>
   </tr>
 <% end %>
 <% end %>

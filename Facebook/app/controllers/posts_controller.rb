@@ -37,7 +37,8 @@ def index
     if(session[:user][:friends]) then
       session[:user][:friends].each do |friend|
         if friend[1] == "friend" and friend[0] != session[:user][:username] then
-          @friends << friend[0]
+          @tmp1 = User.find_by_username(friend[0])
+          @friends << [friend[0],@tmp1.id]
         elsif friend[1] == "requesting" then
           @requests << friend[0]
         end
@@ -48,25 +49,62 @@ def index
     @posts = []
     i = 0
     @friends.each do |friend|
-      @tmp = User.find_by_username("#{friend}")
+      @tmp = User.find_by_username("#{friend[0]}")
       @tmp_profile = Profile.find(@tmp.id)
-      if(@tmp.post_count) then
-        ((@tmp.post_count - 5)..(@tmp.post_count - 1)).each do |item|
+      case @tmp.post_count
+      when nil
+        
+      when 0
+        
+      when 1
+        ((@tmp.post_count - 1)..(@tmp.post_count - 1)).each do |item|
+          @posts << @tmp.posts[item]
+        end
+      when 2
+        ((@tmp.post_count - 2)..(@tmp.post_count - 1)).each do |item|
+          @posts << @tmp.posts[item]
+        end
+      when 3
+        ((@tmp.post_count - 3)..(@tmp.post_count - 1)).each do |item|
+          @posts << @tmp.posts[item]
+        end
+      else
+        ((@tmp.post_count - 4)..(@tmp.post_count - 1)).each do |item|
           @posts << @tmp.posts[item]
         end
       end
-      @friends[i] = @tmp_profile.first_name.capitalize + " " + @tmp_profile.last_name.capitalize
+      @friends[i][0] = @tmp_profile.first_name.capitalize + " " + @tmp_profile.last_name.capitalize
       i = i+1
     end
 
     session[:user] = User.find_by_username(session[:user][:username])
 
     if(session[:user].post_count) then
-      @posts << session[:user].posts[session[:user].post_count - 1]
+      case session[:user].post_count
+      when 0
+        
+      when 1
+        ((session[:user].post_count - 1)..(session[:user].post_count - 1)).each do |item|
+          @posts << session[:user].posts[item]
+        end
+      when 2
+        ((session[:user].post_count - 2)..(session[:user].post_count - 1)).each do |item|
+          @posts << session[:user].posts[item]
+        end
+      when 3
+        ((session[:user].post_count - 3)..(session[:user].post_count - 1)).each do |item|
+          @posts << session[:user].posts[item]
+        end
+      else
+        ((session[:user].post_count - 4)..(session[:user].post_count - 1)).each do |item|
+          @posts << session[:user].posts[item]
+        end
+      end
     end
 
 
-    if(@posts.size > 1) 
+    if(@posts.size > 1)
+    p @posts
     @posts = @posts.sort_by {|post| post.created_at}
     @posts = @posts.reverse
     end
@@ -95,11 +133,11 @@ def index
       if(session[:user].friend_count > 1) then
         tmp = []
         session[:user][:friends].each do |f|
-          tmp << f.key(1)
+          tmp << f[0]
         end
 
         @profiles.each do |b|
-          if tmp.includes?(b.username) then
+          if tmp.include?(b.username) then
             @friends << b
           else
             @enemies << b

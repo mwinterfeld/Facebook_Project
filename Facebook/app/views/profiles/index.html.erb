@@ -28,7 +28,7 @@
 
       #page {
         background-color: #f0f0f0;
-        width: 1250px;
+        width: 800px;
         margin: 0;
         margin-left: auto;
         margin-right: auto;
@@ -46,9 +46,10 @@
         margin-right: auto;
       }
 
-      #sidebar {
-        float: right;
-        width: 175px;
+      #seachbar {
+        background-color: blue;
+        float: 0 auto;
+        width: 300px;
       }
 
       #footer {
@@ -73,6 +74,12 @@
         font-size: 16px;
       }
 
+      #home {
+        float: right;
+        background-color: red;
+        margin-right: 10px;
+      }
+
       #sidebar ul {
         margin-left: 0;
         padding-left: 0;
@@ -90,24 +97,52 @@
         margin-bottom: 5px;
       }
 
+      #title {
+       float: left;
+       margin-left: 40px;
+       margin-right: 10px;
+       background-color: lightgreen;
+      }
+
       .filename {
         font-style: italic;
       }
     </style>
     
   </head>
-  <body>
-    <div id="page">
-      <div id="content">
-        <div id="header"> 
-          <div id = "title" style="float:left">
-            <h1>Profile</h1>
-            <h2>Welcome to your Profile!</h2>
-          </div>
-          
-        </div>
+  <div id="page">
+          <div id = "title">
+            <h1>All Friends</h1>
+          <table>
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% if(@profiles) then %>
+      <% @profiles.each do |profile| %>
+      <% if profile.username != session[:user].username %>
+        <tr>
+        <td><%= link_to "#{profile.first_name.capitalize + " " + profile.last_name.capitalize}", private_profiles_path(profile.user_id) %>
+        </tr>
+        <% end %>
+      <% end %>
+    <% end %>
+  </table>
+  </div>
 
-      <div id="footer">&nbsp;</div>
-    </div>
-  </body>
+  <div id="searchbar">
+  <%= form_tag search_result_posts_path do %>
+    <%= text_field_tag :search, params[:search] %>
+    <%= submit_tag "Search", :name => nil %>
+  <% end %>
+  </div>
+
+  <div id="home">
+          <p>
+          <%= button_to 'Home', posts_path, :method => :get %> 
+          </p>
+          </div>
+  </div>
 </html>
