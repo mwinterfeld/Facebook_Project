@@ -19,5 +19,4 @@ development:
   encoding: unicode
   database: myapp_development
   pool: 5
-  username: localhost
   password:
