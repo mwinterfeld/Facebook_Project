@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(:version => 20131214235125) do
     t.integer  "post_count"
     t.integer  "friend_count"
     t.string   "friends"
-#    t.string   "username"
-#    t.string   "password"
+    t.string   "username"
+    t.string   "password"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
   end
