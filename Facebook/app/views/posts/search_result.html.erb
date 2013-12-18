@@ -11,18 +11,18 @@
 <% if (@profiles) then %>
 <% @friends.each do |id| %>
   <tr>
-    <td><%= id[:first_name]%></td>
-    <td><%= id[:last_name]%></td>
-    <td><%= id[:country]%></td>
+    <td><%= id[:first_name].capitalize%></td>
+    <td><%= id[:last_name].capitalize%></td>
+    <td><%= id[:country].capitalize%></td>
     <td><%= link_to 'Link to Profile', private_profiles_path(id[:user_id]) %>
     </td>
   </tr>
 <% end %>
 <% @enemies.each do |id| %>
   <tr>
-    <td><%= id[:first_name]%></td>
-    <td><%= id[:last_name]%></td>
-    <td><%= id[:country]%></td>
+    <td><%= id[:first_name].capitalize%></td>
+    <td><%= id[:last_name].capitalize%></td>
+    <td><%= id[:country].capitalize%></td>
     <td><%= link_to 'Link to Profile', public_profiles_path(id[:user_id]) %>
     </td>
   </tr>

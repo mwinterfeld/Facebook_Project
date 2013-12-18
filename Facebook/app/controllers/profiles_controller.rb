@@ -2,7 +2,25 @@ class ProfilesController < ApplicationController
   # GET /profiles
   # GET /profiles.json
   def index
-    @profiles = Profile.all
+    @current_user = User.find(session[:user].id)
+    @current_user.friends.each do |friend|
+      params.keys.each do |param|
+        if(param == friend[0])
+          @current_friend = User.find_by_username(friend[0])
+          @current_user.remove_friend(friend[0])
+          @current_friend.remove_friend(session[:user].username)
+          session[:user] = User.find(session[:user].id)
+          return redirect_to posts_path
+        end
+      end
+    end
+    
+    @profiles = []
+    session[:user].friends.each do |friend|
+      if(friend[1] == "friend")
+        @profiles << Profile.find_by_username(friend[0])
+      end
+    end
 
     respond_to do |format|
       format.html # index.html.erb

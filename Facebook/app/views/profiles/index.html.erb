@@ -99,9 +99,15 @@
 
       #title {
        float: left;
+       width: 200px;
        margin-left: 40px;
        margin-right: 10px;
        background-color: lightgreen;
+      }
+      #friend{
+        color: #888;
+        font-weight: normal;
+        font-size: 16px;
       }
 
       .filename {
@@ -113,6 +119,7 @@
   <div id="page">
           <div id = "title">
             <h1>All Friends</h1>
+
           <table>
     <tr>
       <th></th>
@@ -124,7 +131,8 @@
       <% @profiles.each do |profile| %>
       <% if profile.username != session[:user].username %>
         <tr>
-        <td><%= link_to "#{profile.first_name.capitalize + " " + profile.last_name.capitalize}", private_profiles_path(profile.user_id) %>
+        <td id="friend"><%= link_to "#{profile.first_name.capitalize + " " + profile.last_name.capitalize}", private_profiles_path(profile.user_id) %>
+          <form style="float:right"><%= submit_tag "Unfriend", :name => profile.username, :url => profiles_path %></form>
         </tr>
         <% end %>
       <% end %>
