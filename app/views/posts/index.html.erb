@@ -146,7 +146,7 @@
     <% if(@requests) then %>
       <% @requests.each do |request| %>
         <tr>
-        <td>User: <%= "#{request}" %> <%= form_tag posts_path , :method=> 'get' do%>
+        <td>User: <%= "#{request.first_name.capitalize + ' ' + request.last_name.capitalize}" %> <%= form_tag posts_path , :method=> 'get' do%>
 
         <%= button_tag "Add Friend", :name => "#{request}" %>
     

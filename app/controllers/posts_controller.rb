@@ -45,6 +45,11 @@ def index
       end
     end
 
+    @requests.each do |request|
+      new_request = Profile.find_by_username(request)
+      @requests[@requests.index(request)] = new_request
+    end
+
     # Display most recent posts
     @posts = []
     i = 0
