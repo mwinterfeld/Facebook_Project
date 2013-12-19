@@ -57,7 +57,7 @@ ActiveRecord::Schema.define(:version => 20131219040448) do
     t.string   "password"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
-    t.string   "wall_posts"
+    t.text     "wall_posts"
   end
 
 end
