@@ -22,7 +22,11 @@
   <tr>
     <td><%= id[:first_name].capitalize%></td>
     <td><%= id[:last_name].capitalize%></td>
+    <% if(id[:country]) then %>
     <td><%= id[:country].capitalize%></td>
+    <% else %>
+    <td></td>
+    <% end %>
     <td><%= link_to 'Link to Profile', public_profiles_path(id[:user_id]) %>
     </td>
   </tr>
