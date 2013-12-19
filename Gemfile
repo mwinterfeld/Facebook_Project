@@ -39,8 +39,6 @@ group :development do
   gem 'rails_layout'
 end
 
- rails generate simple_form:install --bootstrap3
-
 # This gemfile is the best gemfile!
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
