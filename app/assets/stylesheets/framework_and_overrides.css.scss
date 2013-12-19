@@ -30,17 +30,35 @@ img {
   @extend .btn-primary;
   @extend .btn-lg;
   }
+
+  .footer {
+          height:24px; // Replace with the height your footer should be
+          width: inherit; // Don't change
+          background-image: none;
+          background-repeat: repeat;
+          background-attachment: scroll;
+          background-position: 0% 0%;
+          position: fixed;
+          bottom: 0pt;
+          left: 0pt;
+  }   
+
+ .footer_contents {
+           height:24px; // Replace with the height your footer should be
+           width: 1000px; // Visible width of footer
+           margin:auto;
+ }
+
 // apply styles to HTML elements
 // to make views framework-neutral
 main {
   @extend .container;
   background-color: #eee;
   padding-bottom: 80px;
-  width: 100%;
-  height:490px;
+  width: auto;
+  height:auto;
   margin-top: 51px; // accommodate the navbar
   margin-bottom:24px;
-  overflow:auto;
   }
 section {
   @extend .row;
