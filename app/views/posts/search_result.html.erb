@@ -13,7 +13,11 @@
   <tr>
     <td><%= id[:first_name].capitalize%></td>
     <td><%= id[:last_name].capitalize%></td>
-    <td><%= id[:country].capitalize%></td>
+    <td>
+      <% if id[:country] then %>
+      <%= id[:country].capitalize%>
+    <% end%>
+    </td>
     <td><%= link_to 'Link to Profile', private_profiles_path(id[:user_id]) %>
     </td>
   </tr>
@@ -22,7 +26,7 @@
   <tr>
     <td><%= id[:first_name].capitalize%></td>
     <td><%= id[:last_name].capitalize%></td>
-    <% if(id[:country]) then %>
+    <% if id[:country] then %>
     <td><%= id[:country].capitalize%></td>
     <% else %>
     <td></td>

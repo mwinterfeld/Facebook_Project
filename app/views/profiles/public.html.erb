@@ -125,7 +125,9 @@
 
                 <p>
                   <b>City:</b>
+                  <% if @profile.city then %>
                   <%= @profile.city.capitalize %>
+                  <%end%>
                 </p>
                 </div>
 
