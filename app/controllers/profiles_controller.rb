@@ -48,6 +48,8 @@ class ProfilesController < ApplicationController
     @current_user = User.find(params[:format])
     @id = @current_user.id
     @profile = Profile.find_by_username(@current_user.username) 
+
+
   end
 
   def friends
