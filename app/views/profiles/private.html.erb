@@ -170,7 +170,6 @@
                   <%= @profile.interests %>
                   <% end%>
                 </p>
-
                 <div>
                     <%= form_tag private_profiles_path(@profile.user_id), :method => :get do %>
                       <p>
@@ -179,7 +178,11 @@
                       </p>
                     <% end %>
                 </div>
-                
+                <div>
+                <% if(session[:user][:id] == @id) then %>
+               <p><%= link_to 'Edit', edit_profile_path(@profile) %> </p>
+               <%end %>
+                </div>
                 <div>
                       <table>
                       <tr>
@@ -198,12 +201,6 @@
                     <% end %>
                     </table>
               </div>
-
-                <div>
-                <% if(session[:user][:id] == @id) then %>
-               <p><%= link_to 'Edit', edit_profile_path(@profile) %> </p>
-               <%end %>
-                </div>
 
         </div>
 
