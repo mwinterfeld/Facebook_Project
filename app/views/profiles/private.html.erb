@@ -158,13 +158,12 @@
                         <th id="posts_header">All recent Posts</th>
                         <th></th>
                         <th></th>
-                        <th></th>
                       </tr>
 
                     <% if(@wall_posts) then %>
                         <% @wall_posts.each do |post| %>
                           <tr >
-                            <% p post %>
+                            <td><%= link_to post.user_id, private_profiles_path(post.user_id) %></td>
                             <td id="post_right"><%= post.content %></td>
                           </tr>
                         <% end %>
