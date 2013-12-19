@@ -112,7 +112,6 @@ def index
 
 
     if(@posts.size > 1)
-    p @posts
     @posts = @posts.sort_by {|post| post.created_at}
     @posts = @posts.reverse
     end

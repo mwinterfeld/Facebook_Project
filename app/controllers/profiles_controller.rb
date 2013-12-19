@@ -61,6 +61,11 @@ class ProfilesController < ApplicationController
     end
 
     @wall_posts = @current_user.wall_posts
+
+    if(@wall_posts)
+    @wall_posts = @wall_posts.sort_by {|post| post.created_at}
+    @wall_posts = @wall_posts.reverse
+    end
     
   end
 
