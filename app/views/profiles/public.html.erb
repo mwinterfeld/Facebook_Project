@@ -132,9 +132,13 @@
                 </div>
 
                 <div>
+                <% if @friend_status == "pending" then %>
+                  Friend Request Sent
+                <%else%>
                 <form>
                 <input type="submit" value="Add Friend" name="add">
                 </form>
+                <% end %>
                 </div>
                 </div>
       <div id="footer">&nbsp;</div>

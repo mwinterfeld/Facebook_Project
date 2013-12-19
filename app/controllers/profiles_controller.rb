@@ -41,6 +41,11 @@ class ProfilesController < ApplicationController
     end
     @current_user = User.find(params[:format])
     @profile = @current_user.profile
+    session[:user].friends.each do |friend|
+      if(friend[0] == @current_user.username)
+        @friend_status = friend[1]
+      end
+    end
     @current_user = []  
   end
 
