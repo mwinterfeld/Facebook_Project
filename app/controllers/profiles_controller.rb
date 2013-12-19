@@ -61,6 +61,7 @@ class ProfilesController < ApplicationController
     end
 
     @wall_posts = @current_user.wall_posts
+    
   end
 
   def friends
