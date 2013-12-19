@@ -1,7 +1,7 @@
-Facebook_Project
+Facebook Project
 ================
 
 Authors:
-  mwinterfeld
-  guta1844
+  mwinterfeld, 
+  guta1844,
   gpoisoned
