@@ -21,8 +21,8 @@ ActiveRecord::Schema.define(:version => 20131214235125) do
     t.integer  "dislikes_count"
     t.datetime "created_at",     :null => false
     t.datetime "updated_at",     :null => false
-    t.string   "user_id"
-    t.string   "integer"
+    t.integer  "user_id"
+    t.integer  "integer"
     t.string   "username"
   end
 
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(:version => 20131214235125) do
     t.string   "interests"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.string   "user_id"
-    t.string   "integer"
+    t.integer  "user_id"
+    t.integer  "integer"
     t.string   "username"
   end
 

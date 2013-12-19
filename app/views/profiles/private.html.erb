@@ -124,17 +124,23 @@
 
                 <p>
                   <b>City:</b>
+                  <% if @profile.city then%>
                   <%= @profile.city.capitalize %>
+                  <% end%>
                 </p>
 
                 <p>
                   <b>Country:</b>
+                  <% if @profile.country then%>
                   <%= @profile.country.capitalize %>
+                  <% end%>
                 </p>
 
                 <p>
                   <b>Interests:</b>
+                  <% if @profile.country then%>
                   <%= @profile.interests %>
+                  <% end%>
                 </p>
 
                 <div>
