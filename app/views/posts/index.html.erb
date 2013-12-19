@@ -1,87 +1,110 @@
-<body>
 <div>
 <div>   
-  <h1>Newsfeed</h1>
-  <h2><%= "Hello there #{@first_name}" %></h2>
-  <h3><%= link_to 'Profile', private_profiles_path(@id) %></h3>
-  <br>
-  <h3>Friend Requests</h3>
-  <table>
-    <tr>
-      <th></th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-    <% if(@request_profiles) then %>
-      <% @request_profiles.each do |request| %>
-        <tr>
-        <td>User: <%= "#{request.first_name.capitalize + ' ' + request.last_name.capitalize}" %> <%= form_tag posts_path , :method=> 'get' do%>
+  <div>
+    <div class="col-md-6"><h3>Newsfeed</h3></div>
 
-        <%= button_tag "Add Friend", :name => "#{request.username}" %>
+    <div class="col-md-4 col-md-offset-0">
+              <%= form_tag search_result_posts_path do %>
+                <p style="margin-top:25px">
+                <%= text_field_tag :search, params[:search] %>
+                <%= submit_tag "Search", :name => nil %>
+                </p>
+              <% end %>
+    </div>
+    <div class="col-md-6 col-md-offset-11">
+            <%= form_tag posts_path , :method=> 'get' do%>
+            <p style="margin-top:-40px">
+              <%= submit_tag "Logout"%>
+            </p>
+            <% end%>
+    </div>
+    <div class="clearfix visible-md"></div >
+ </div>
+
+  <div class="row">
+    <div class="col-md-4"> <h4><%= "Hello there #{@first_name}!" %></h4></div>
+
+  </div>
+
+
+  </div>
+  <h4><%= link_to 'Profile', private_profiles_path(@id) %></h4>
+  <br>
+
+  <div class="row">
+    <div class="col-md-2"> 
+        <h4>Friend Requests</h4>
+        <table>
+                  <tr>
+                    <th></th>
+                  </tr>
+                  <% if(@request_profiles) then %>
+                    <% @request_profiles.each do |request| %>
+                      <tr>
+                      <td>User: <%= "#{request.first_name.capitalize + ' ' + request.last_name.capitalize}" %> <%= form_tag posts_path , :method=> 'get' do%>
+
+                      <%= button_tag "Add Friend", :name => "#{request.username}" %>
+                  
+                      <% end%></td>
+                      </tr>
+                    <% end %>
+                  <% end %>
+      </table>
     
-        <% end%></td>
-        </tr>
-      <% end %>
-    <% end %>
-  </table>
+    </div>
+      
+
+    <div class="col-md-8">
+                <%= form_tag posts_path do %>
+                  <p>
+                  <%= text_area_tag :message, params[:message], size: "55x1" %>
+                  <%= submit_tag "Post", :name => nil %>
+                  </p>
+                <% end %>
+                
+                <table style="width:1000px" >
+                <tr>
+                  <th>All recent Posts</th>
+                  <th></th>
+                </tr>
+
+              <% if(@posts) then %>
+              <% @posts.each do |post| %>
+                <tr >
+                  <td style="width:200px"><%= link_to "#{post[:username]}", private_profiles_path(post[:user_id]) %></td>
+                  <td><%= post.content %></td>
+                </tr>
+              <% end %>
+              <% end %>
+              </table>
+                  
+    </div>
+    <div class="col-md-2">
+          <div>
+            <h4><%= link_to "Friends", profiles_path %></h4>
+            <table>
+            <tr>
+              <th></th>
+              <th></th>
+              <th></th>
+            </tr>
+
+          <% if(@friends) then %>
+          <% @friends.each do |friend| %>
+            <tr>
+              <td><%= link_to "#{friend[0]}", private_profiles_path(friend[1]) %></td>
+            </tr>
+          <% end %>
+          <% end %>
+          </table>
+          </div>  
+    
+    </div>
+  </div>
+
+
 </div>
 
 <div>
-  <%= form_tag search_result_posts_path do %>
-    <p>
-    <%= text_field_tag :search, params[:search] %>
-    <%= submit_tag "Search", :name => nil %>
-    </p>
-  <% end %>
-  <%= form_tag posts_path do %>
-    <p>
-    <%= text_area_tag :message, params[:message], size: "31x4" %>
-    <%= submit_tag "Post", :name => nil %>
-    </p>
-  <% end %>
-  
-  <table>
-  <tr>
-    <th>All recent Posts</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% if(@posts) then %>
-<% @posts.each do |post| %>
-  <tr >
-    <td><%= link_to "#{post[:username]}", private_profiles_path(post[:user_id]) %></td>
-    <td><%= post.content %></td>
-  </tr>
-<% end %>
-<% end %>
-</table>
-</div>  
-
-<div>
-  <%= form_tag posts_path , :method=> 'get' do%>
-  <p>
-    <%= submit_tag "Logout"%>
-  </p>
-  <% end%>
-  <h1><%= link_to "Friends", profiles_path %></h1>
-  <table>
-  <tr>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-
-<% if(@friends) then %>
-<% @friends.each do |friend| %>
-  <tr>
-    <td><%= link_to "#{friend[0]}", private_profiles_path(friend[1]) %></td>
-  </tr>
-<% end %>
-<% end %>
-</table>
 </div>  
 </div>  
-</body>

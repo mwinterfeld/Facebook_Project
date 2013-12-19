@@ -3,8 +3,7 @@
     <div id="page">
         <div id="header"> 
           <div id = "title" style="float:left">
-            <h1>Profile</h1>
-            <h2>Private Profile!</h2>
+            <h3>Private Profile!</h3>
           </div>
           <div style="float:right">
           <p>
@@ -47,7 +46,7 @@
                 <div>
                     <%= form_tag private_profiles_path(@profile.user_id), :method => :get do %>
                       <p>
-                      <%= text_area_tag :message, params[:message], size: "31x4" %>
+                      <%= text_area_tag :message, params[:message], size: "50x1" %>
                       <%= submit_tag "Post", :name => nil %>
                       </p>
                     <% end %>
@@ -58,7 +57,7 @@
                <%end %>
                 </div>
                 <div>
-                      <table>
+                      <table style="width:1000px">
                       <tr>
                         <th id="posts_header">All recent Posts</th>
                         <th></th>
@@ -68,8 +67,8 @@
                     <% if(@wall_posts) then %>
                         <% @wall_posts.each do |post| %>
                           <tr >
-                             <td id="post_left"><%= link_to "#{post[:username]}", private_profiles_path(post[:user_id]) %></td>
-                            <td id="post_right"><%= post.content %></td>
+                             <td style="width:200px"><%= link_to "#{post[:username]}", private_profiles_path(post[:user_id]) %></td>
+                            <td ><%= post.content %></td>
                           </tr>
                         <% end %>
                     <% end %>
