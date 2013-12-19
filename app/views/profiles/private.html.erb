@@ -151,7 +151,26 @@
                       </p>
                     <% end %>
                 </div>
+                
+                <div>
+                      <table>
+                      <tr>
+                        <th id="posts_header">All recent Posts</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                      </tr>
 
+                    <% if(@wall_posts) then %>
+                        <% @wall_posts.each do |post| %>
+                          <tr >
+                            <% p post %>
+                            <td id="post_right"><%= post.content %></td>
+                          </tr>
+                        <% end %>
+                    <% end %>
+                    </table>
+              </div>
 
                 <div>
                 <% if(session[:user][:id] == @id) then %>
