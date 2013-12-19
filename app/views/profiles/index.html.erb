@@ -1,123 +1,5 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Profile</title>
-    <style type="text/css" media="screen">
-      body {
-        margin: 0;
-        margin-bottom: 25px;
-        padding: 0;
-        background-color: #f0f0f0;
-        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
-        font-size: 13px;
-        color: #333;
-      }
-
-      h1 {
-        font-size: 28px;
-        color: #000;
-      }
-
-      a  {color: #03c}
-      a:hover {
-        background-color: #03c;
-        color: white;
-        text-decoration: none;
-      }
-
-
-      #page {
-        background-color: #f0f0f0;
-        width: 800px;
-        margin: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      #content {
-        float: left;
-        background-color: white;
-        border: 3px solid #aaa;
-        border-top: none;
-        padding: 25px;
-        width: 1000px;
-        height: 500px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      #seachbar {
-        background-color: blue;
-        float: 0 auto;
-        width: 300px;
-      }
-
-      #footer {
-        clear: both;
-      }
-
-      #header, #about, #getting-started {
-        padding-left: 75px;
-        padding-right: 30px;
-      }
-
-
-      #header {
-        background-repeat: no-repeat;
-        background-position: top left;
-        height: 64px;
-      }
-      #header h1, #header h2 {margin: 0}
-      #header h2 {
-        color: #888;
-        font-weight: normal;
-        font-size: 16px;
-      }
-
-      #home {
-        float: right;
-        background-color: red;
-        margin-right: 10px;
-      }
-
-      #sidebar ul {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #sidebar ul h3 {
-        margin-top: 25px;
-        font-size: 16px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #ccc;
-      }
-      #sidebar li {
-        list-style-type: none;
-      }
-      #sidebar ul.links li {
-        margin-bottom: 5px;
-      }
-
-      #title {
-       float: left;
-       width: 200px;
-       margin-left: 40px;
-       margin-right: 10px;
-       background-color: lightgreen;
-      }
-      #friend{
-        color: #888;
-        font-weight: normal;
-        font-size: 16px;
-      }
-
-      .filename {
-        font-style: italic;
-      }
-    </style>
-    
-  </head>
-  <div id="page">
-          <div id = "title">
+  <div>
+          <div>
             <h1>All Friends</h1>
 
           <table>
@@ -131,7 +13,7 @@
       <% @profiles.each do |profile| %>
       <% if profile.username != session[:user].username %>
         <tr>
-        <td id="friend"><%= link_to "#{profile.first_name.capitalize + " " + profile.last_name.capitalize}", private_profiles_path(profile.user_id) %>
+        <td><%= link_to "#{profile.first_name.capitalize + " " + profile.last_name.capitalize}", private_profiles_path(profile.user_id) %>
           <form style="float:right"><%= submit_tag "Unfriend", :name => profile.username, :url => profiles_path %></form>
         </tr>
         <% end %>
@@ -140,17 +22,16 @@
   </table>
   </div>
 
-  <div id="searchbar">
+  <div>
   <%= form_tag search_result_posts_path do %>
     <%= text_field_tag :search, params[:search] %>
     <%= submit_tag "Search", :name => nil %>
   <% end %>
   </div>
 
-  <div id="home">
+  <div>
           <p>
           <%= button_to 'Home', posts_path, :method => :get %> 
           </p>
           </div>
   </div>
-</html>

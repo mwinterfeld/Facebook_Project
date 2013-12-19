@@ -1,136 +1,6 @@
-<style type="text/css" media="screen">
-      body {
-        margin: 0;
-        margin-bottom: 25px;
-        padding: 0;
-        font-family: "Lucida Grande", "Bitstream Vera Sans", "Verdana";
-        font-size: 13px;
-        color: #333;
-      }
-
-      h1 {
-        font-size: 28px;
-        color: #000;
-      }
-
-      a  {color: blue}
-      a:hover {
-        background-color: #03c;
-        color: white;
-        text-decoration: none;
-      }
-
-      #page {
-        width: 1000px;
-        margin: 0;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      #content {
-        float: left;
-        background-color: lightgrey;
-        padding: 25px;
-        width: 1000px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      #sidebar {
-        float: right;
-        width: 175px;
-      }
-
-      #footer {
-        clear: both;
-      }
-
-      #header, #about, #getting-started {
-        padding-left: 75px;
-        padding-right: 30px;
-      }
-
-
-      #header {
-        background-repeat: no-repeat;
-        background-position: top left;
-        height: 64px;
-      }
-      #header h1, #newsfeed h2 {margin: 0; width: 150px; padding-right: 40px; padding-left: 10px;
-}
-      #header h2 {
-        color: #888;
-        font-weight: normal;
-        font-size: 16px;
-      }
-
-      #sidebar ul {
-        margin-left: 0;
-        padding-left: 0;
-      }
-      #sidebar ul h3 {
-        margin-top: 25px;
-        font-size: 16px;
-        padding-bottom: 10px;
-        border-bottom: 1px solid #ccc;
-      }
-      #sidebar li {
-        list-style-type: none;
-      }
-      #sidebar ul.links li {
-        margin-bottom: 5px;
-      }
-      #table {
-        border-collapse:collapse;
-        border:1px solid blue;
-      }
-      #posts {
-        float: left;
-
-        width: 400px;
-      }
-      #newsfeed {
-        float: left;
-
-      }
-      #friends {
-        float: left;
-        float: top;
-        margin-left: 30px;
-      }
-
-      #post_left {
-        width: 70px;
-        height: 35px;
-        float: left;
-        border-style:solid;
-        border-width:2px;
-        border-right: none;
-      }
-
-      #posts_header {
-        width: 300px;
-        font-size: 20px;
-        float: left;
-      }
-
-      #post_right {
-        width: 305px;
-        height: 35px;
-        float: left;
-        border-style:solid;
-        border-width:2px;
-        border-left: none;
-      }
-
-      .filename {
-        font-style: italic;
-      }
-    </style>
-
 <body>
-<div id="content">
-<div id="newsfeed">   
+<div>
+<div>   
   <h1>Newsfeed</h1>
   <h2><%= "Hello there #{@first_name}" %></h2>
   <h3><%= link_to 'Profile', private_profiles_path(@id) %></h3>
@@ -157,7 +27,7 @@
   </table>
 </div>
 
-<div id="posts">
+<div>
   <%= form_tag search_result_posts_path do %>
     <p>
     <%= text_field_tag :search, params[:search] %>
@@ -173,7 +43,7 @@
   
   <table>
   <tr>
-    <th id="posts_header">All recent Posts</th>
+    <th>All recent Posts</th>
     <th></th>
     <th></th>
     <th></th>
@@ -182,15 +52,15 @@
 <% if(@posts) then %>
 <% @posts.each do |post| %>
   <tr >
-    <td id="post_left"><%= link_to "#{post[:username]}", private_profiles_path(post[:user_id]) %></td>
-    <td id="post_right"><%= post.content %></td>
+    <td><%= link_to "#{post[:username]}", private_profiles_path(post[:user_id]) %></td>
+    <td><%= post.content %></td>
   </tr>
 <% end %>
 <% end %>
 </table>
 </div>  
 
-<div id="friends">
+<div>
   <%= form_tag posts_path , :method=> 'get' do%>
   <p>
     <%= submit_tag "Logout"%>
