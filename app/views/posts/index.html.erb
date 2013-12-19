@@ -143,12 +143,12 @@
       <th></th>
       <th></th>
     </tr>
-    <% if(@requests) then %>
-      <% @requests.each do |request| %>
+    <% if(@request_profiles) then %>
+      <% @request_profiles.each do |request| %>
         <tr>
         <td>User: <%= "#{request.first_name.capitalize + ' ' + request.last_name.capitalize}" %> <%= form_tag posts_path , :method=> 'get' do%>
 
-        <%= button_tag "Add Friend", :name => "#{request}" %>
+        <%= button_tag "Add Friend", :name => "#{request.username}" %>
     
         <% end%></td>
         </tr>

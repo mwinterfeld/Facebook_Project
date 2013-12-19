@@ -33,6 +33,7 @@ def index
 
     @friends = []
     @requests = []
+    @request_profiles = []
     @username = session[:user][:username]
     if(session[:user][:friends]) then
       session[:user][:friends].each do |friend|
@@ -45,9 +46,11 @@ def index
       end
     end
 
+    if(@requests != []) then
     @requests.each do |request|
       new_request = Profile.find_by_username(request)
-      @requests[@requests.index(request)] = new_request
+      @request_profiles << new_request
+    end
     end
 
     # Display most recent posts
