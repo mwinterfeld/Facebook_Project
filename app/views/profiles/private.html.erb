@@ -144,10 +144,21 @@
                 </p>
 
                 <div>
+                    <%= form_tag do %>
+                      <p>
+                      <%= text_area_tag :message, params[:message], size: "31x4" %>
+                      <%= submit_tag "Post", :name => nil %>
+                      </p>
+                    <% end %>
+                </div>
+
+
+                <div>
                 <% if(session[:user][:id] == @id) then %>
                <p><%= link_to 'Edit', edit_profile_path(@profile) %> </p>
-                <% end %>
+               <%end %>
                 </div>
+
         </div>
 
       <div id="footer">&nbsp;</div>
