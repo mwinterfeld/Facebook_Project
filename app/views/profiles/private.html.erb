@@ -144,7 +144,7 @@
                 </p>
 
                 <div>
-                  <%= form_tag private_profiles_path(session[:user][:id]), :method=>'get' do %>
+                    <%= form_tag private_profiles_path(@profile.user_id), :method => :get do %>
                       <p>
                       <%= text_area_tag :message, params[:message], size: "31x4" %>
                       <%= submit_tag "Post", :name => nil %>

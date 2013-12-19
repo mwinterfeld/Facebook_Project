@@ -54,7 +54,14 @@ class ProfilesController < ApplicationController
     @id = @current_user.id
     @profile = Profile.find_by_username(@current_user.username) 
 
+    if(params[:message]) then
+      @user = User.find(session[:user].id)
+      @user.add_wall_post(params[:message], params[:format], session[:user].id)
+      redirect_to private_profiles_path(@id)
+    end
 
+    @wall_posts = @current_user.wall_posts
+    
   end
 
   def friends

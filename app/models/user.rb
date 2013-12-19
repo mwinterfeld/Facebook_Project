@@ -42,6 +42,17 @@ class User < ActiveRecord::Base
     self.save
   end
 
+   def add_wall_post(post_content, wall_id, poster_id)
+    user = User.find(wall_id)
+    poster = Profile.find_by_user_id(poster_id)
+    post = Post.new(:content => "#{post_content}", :likes_count => 0, :dislikes_count => 0, :is_comment => 0, :username => poster.first_name.capitalize + " " + poster.last_name.capitalize, :user_id => poster_id)
+    if(!user.wall_posts) then
+      user.wall_posts = []
+    end
+    user.wall_posts << post
+    user.save
+  end
+
   def add_comment(post_content)
     post = Post.new(:content => "#{post_content}", :likes_count => 0, :dislikes_count => 0, :is_comment => 1)
     self.posts << post
